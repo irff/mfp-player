@@ -116,29 +116,26 @@ var episodes = [
 		source: 'http://datashat.net/music_for_programming_29-luke_handsfree.mp3'
 	}];
 
-var player = document.getElementById('player');
-var episode_title = document.getElementById('episode-title');
-var episode_duration = document.getElementById('episode-duration');
-
-var episode;
+var player = document.getElementById('player'),
+	episode_title = document.getElementById('episode-title'),
+	episode_duration = document.getElementById('episode-duration'),
+	x = Math.floor(Math.random()*29);
 
 function playMusic(trackID) {
 	episode_title.innerHTML = episodes[x].title;
 	player.src = episodes[x].source;
 	player.play();
-	player.onloadedmetadata = function() {
-		var duration = player.duration;
-		var hour = Math.floor(duration / 3600);
-		duration %= 3600;
-		var min =  Math.floor(duration / 60);
-		duration %= 60;
-		var sec = Math.floor(duration);
-		episode_duration.innerHTML = ((hour>0)?hour+'h ':'') + ((min > 0 && min < 10)?'0':'') + min  + 'm ' + ((sec > 0 && sec < 10)?'0':'') + sec + 's';
-	}
 }
 
-var x = Math.floor(Math.random()*29);
-playMusic(x);
+player.onloadedmetadata = function() {
+	var duration = player.duration;
+	var hour = Math.floor(duration / 3600);
+	duration %= 3600;
+	var min =  Math.floor(duration / 60);
+	duration %= 60;
+	var sec = Math.floor(duration);
+	episode_duration.innerHTML = ((hour > 0) ? hour + 'h ' : '') + ((min > 0 && min < 10) ? '0' : '') + min  + 'm ' + ((sec > 0 && sec < 10) ? '0' : '') + sec + 's';
+}
 
 player.onended = function(prev) {
 	do {
@@ -146,3 +143,5 @@ player.onended = function(prev) {
 	} while(x == prev);
 	playMusic(x);
 }
+
+playMusic(x);
