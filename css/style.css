@@ -1,0 +1,19 @@
+body {
+	background-color: #E5E6E3;
+	font-family: monospace;
+}
+
+.window {
+	margin: 0 auto;
+	max-width: 480px;
+}
+
+.green {
+	padding: 6px;
+	background-color: #80bb16;
+	color: #E5E6E3;
+}
+
+audio {
+	width: 100%;
+}
